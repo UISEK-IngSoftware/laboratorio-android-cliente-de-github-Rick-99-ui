@@ -5,18 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ec.edu.uisek.githubclient.databinding.FragmentRepoItemBinding
+import ec.edu.uisek.githubclient.databinding.FragmentRepoitemBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RepoItem.newInstance] factory method to
- * create an instance of this fragment.
- */
 
-class RepoItem : Fragment() {
-   private var _binding: FragmentRepoItemBinding? = null
+class Repoitem : Fragment() {
+    private var _binding: FragmentRepoitemBinding?=null
     private val binding get() = _binding!!
 
+    // Método de ciclo de vida llamado al crear el fragmento
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -24,40 +20,34 @@ class RepoItem : Fragment() {
         }
     }
 
+    // Crea y devuelve la jerarquía de vistas asociada con el fragmento
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repo_item, container, false)
+        _binding = FragmentRepoitemBinding.inflate(inflater,container, false)
         return binding.root
     }
 
+    // Llamado inmediatamente después de que onCreateView ha retornado
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.repoName.text = "Mi repositorio"
-        binding.repoDescription.text = "Esta es la descripcion del repositorio"
+        binding.repoDescription.text = "Esta la descripción del repositorio"
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    // Llamado cuando la vista del fragmento está siendo destruida
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
-
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RepoItem.
-         */
-        // TODO: Rename and change types and number of parameters
+
+        // Método estático para crear una nueva instancia del fragmento
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RepoItem().apply {
+            Repoitem().apply {
                 arguments = Bundle().apply {
 
                 }

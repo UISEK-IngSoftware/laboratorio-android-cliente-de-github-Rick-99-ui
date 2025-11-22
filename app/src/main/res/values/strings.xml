@@ -1,8 +1,24 @@
 <resources>
     <string name="app_name">Github Client</string>
-    <string name="test_text">Este es un texto de prueba</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_text">Este es un texto de practica</string>
     <string name="repo_name">Nombre del repositorio</string>
     <string name="repo_description">Descripción del repositorio</string>
     <string name="repo_lang">Lenguaje</string>
-    <string name="test_lang">Kotlin</string>
+    <string name="text_lang">Kotlin</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar"</string>
+    <string name="edit_repo">Editar repositorio</string>
+    <string name="delete_repo">Eliminar repositorio</string>
+    <string name="create_new_repo">Crear nuevo repositorio</string>
+    <string name="edit_repository">Editar repositorio</string>
+    <string name="delete_confirmation">¿Estás seguro de que quieres eliminar este repositorio?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="Description">Description</string>
+
+
 </resources>
+
+
+

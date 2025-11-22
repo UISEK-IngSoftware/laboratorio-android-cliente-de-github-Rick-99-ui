@@ -1,8 +1,8 @@
 # Laboratorio Android. Cliente de GitHub
 
-## Datos del estudiante
-**Nombre** Riccardo Ceron
-**Carrera** Ing. Informatica
+## Datos del cliente
+**NOmbre** Riccardo Ceron
+**Carrera** Ing.Informatica
 
 ## Descripción del Proyecto
 Este proyecto es un ejercicio de laboratorio para estudiantes donde se implementará una aplicación Android que simula un cliente de GitHub. La aplicación se centrará en la implementación de interfaces y layouts, sin integración con la API REST de GitHub en esta fase.
