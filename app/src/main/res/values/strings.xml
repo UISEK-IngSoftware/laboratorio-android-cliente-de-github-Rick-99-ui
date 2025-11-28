@@ -13,10 +13,16 @@
     <string name="create_new_repo">Crear nuevo repositorio</string>
     <string name="edit_repository">Editar repositorio</string>
     <string name="delete_confirmation">¿Estás seguro de que quieres eliminar este repositorio?</string>
+    <!-- Strings used for login activity -->
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="Description">Description</string>
-
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
 </resources>
 
