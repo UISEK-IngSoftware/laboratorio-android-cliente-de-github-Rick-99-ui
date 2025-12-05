@@ -10,6 +10,7 @@ import ec.edu.uisek.githubclient.models.Repo
 import ec.edu.uisek.githubclient.models.RepoRequest
 import ec.edu.uisek.githubclient.services.GithubApiService
 import ec.edu.uisek.githubclient.services.RetrofitClient
+import ec.edu.uisek.githubclient.services.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var reposAdapter: ReposAdapter
     private lateinit var apiService: GithubApiService
+    private lateinit var sessionManager: SessionManager
 
     // Método de ciclo de vida llamado al crear la actividad
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +28,35 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        apiService = RetrofitClient.getApiService()
+        sessionManager = SessionManager(this)
+        try {
+            apiService = RetrofitClient.getApiService()
+        } catch (e: IllegalStateException) {
+            // If RetrofitClient is not initialized (e.g., process death), try to re-initialize or go back to login
+             val credentials = sessionManager.getCredentials()
+             if (credentials != null) {
+                 apiService = RetrofitClient.createAuthenticatedClient(credentials.username, credentials.password)
+             } else {
+                 performLogout()
+                 return
+             }
+        }
         setupRecyclerView()
 
         binding.newRepoFab.setOnClickListener {
             displayNewRepoForm()
+        }
+        binding.logoutButton.setOnClickListener {
+            performLogout()
         }
     }
 
     // Método de ciclo de vida llamado cuando la actividad se reanuda
     override fun onResume() {
         super.onResume()
-        fetchRepositories()
+        if (::apiService.isInitialized) {
+            fetchRepositories()
+        }
     }
 
     // Configura el RecyclerView y su adaptador
@@ -133,6 +152,21 @@ class MainActivity : AppCompatActivity() {
                 showMessage("Error al eliminar el repositorio: ${t.message}")
             }
         })
+    }
+
+    private fun performLogout() {
+        // Clear session credentials
+        sessionManager.clearCredentials()
+        
+        // Clear Retrofit client
+        RetrofitClient.clearClient()
+        
+        // Navigate back to LoginActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        // Clear the activity stack so the user cannot go back to MainActivity
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     // Muestra un mensaje Toast

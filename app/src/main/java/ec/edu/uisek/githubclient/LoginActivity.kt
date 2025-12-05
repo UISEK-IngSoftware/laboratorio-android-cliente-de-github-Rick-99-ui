@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
             RetrofitClient.createAuthenticatedClient(username, password)
             val sessionManager = SessionManager(this)
             sessionManager.saveCredentials(username, password)
+            navigateToMain()
         }
 
 
@@ -39,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }

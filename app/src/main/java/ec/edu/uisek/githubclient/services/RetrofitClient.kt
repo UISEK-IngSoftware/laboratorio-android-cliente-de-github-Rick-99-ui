@@ -43,4 +43,8 @@ object RetrofitClient {
     fun getApiService(): GithubApiService {
         return apiService ?: throw IllegalStateException("Retrofit client no se inició.")
     }
+
+    fun clearClient() {
+        apiService = null
+    }
 }
